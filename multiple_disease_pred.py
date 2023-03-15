@@ -102,37 +102,41 @@ if (selected == 'Heart Disease Prediction'):
         sex = st.text_input('Sex')
         
     with col3:
-        cp = st.text_input('Chest Pain types')
+        currentSmoker = st.text_input('Current Smoker or not')
         
     with col1:
-        trestbps = st.text_input('Resting Blood Pressure')
+        cigsperDay = st.text_input('Cigarette amounts per day')
         
     with col2:
-        chol = st.text_input('Serum Cholestoral in mg/dl')
+        BPMeds = st.text_input('If the patient was on a BP medication')
         
     with col3:
-        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl')
+        prevalentStroke = st.text_input('Any previous strokes')
         
     with col1:
-        restecg = st.text_input('Resting Electrocardiographic results')
+        prevalentHyp = st.text_input('Hypertensive or not')
         
     with col2:
-        thalach = st.text_input('Maximum Heart Rate achieved')
+        diabetes= st.text_input('Diabetic or not')
         
     with col3:
-        exang = st.text_input('Exercise Induced Angina')
+        totChol = st.text_input('Total cholesterol level')
         
     with col1:
-        oldpeak = st.text_input('ST depression induced by exercise')
+        sysBP = st.text_input('Cystolic blood pressure')
         
     with col2:
-        slope = st.text_input('Slope of the peak exercise ST segment')
+        diaBP = st.text_input('Diastolic blood pressure')
         
     with col3:
-        ca = st.text_input('Major vessels colored by flourosopy')
+        BMI = st.text_input('Body Mass Index')
         
     with col1:
-        thal = st.text_input('thal: 0 = normal; 1 = fixed defect; 2 = reversable defect')
+        heartRate = st.text_input('Heart rate')
+    
+    with col2:
+        glucose = st.text_input('Glucose level')
+
         
         
      
@@ -143,17 +147,43 @@ if (selected == 'Heart Disease Prediction'):
     # creating a button for Prediction
     
     if st.button('Heart Disease Test Result'):
-        heart_prediction = heart_disease_model.predict([[age, sex, cp, trestbps, chol, fbs, restecg,thalach,exang,oldpeak,slope,ca,thal]])                          
-        
-        if (heart_prediction[0] == 1):
-          heart_diagnosis = 'The person is having heart disease'
-        else:
-          heart_diagnosis = 'The person does not have any heart disease'
-        
-    st.success(heart_diagnosis)
-        
     
-    
+
+    # Once the progress bar animation is complete, display the result
+        heart_prediction=heart_disease_model.predict([[int(sex),int(age),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),int(diaBP),float(BMI),int(heartRate),int(glucose)]])     
+        # Define the endpoints for the bar graph
+        happy_end = u"\U0001F603"  # Smiling face emoji
+        sad_end = u"\U0001F614"  # Pensive face emoji
+
+# Define the colors for the bar graph
+        green_color = '#00cc96'
+        red_color = '#ef5350'
+
+# Define the animation function
+        def animate_bar_graph(heart_prediction):
+            with st.spinner('Processing...'):
+                time.sleep(2)
+                # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                if heart_prediction[0] == 0:
+                    bar_color = green_color
+                    bar_width = 0.2
+                    end_point = happy_end
+                    heart_diagnosis = "The person has no heart disease"
+                    st.success(f'{heart_diagnosis} {end_point}')
+                else:
+                    bar_color = red_color
+                    bar_width = 500
+                    end_point = sad_end
+                    heart_diagnosis = "The person has heart disease"
+                    st.error(f'{heart_diagnosis} {end_point}')
+            
+           
+            
+            #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+
+# Call the function with the heart_prediction variable
+        animate_bar_graph(heart_prediction)
+        
 
 # Parkinson's Prediction Page
 if (selected == "Parkinsons Prediction"):
