@@ -19,7 +19,7 @@ import time
 
 # parkinsons_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/parkinsons_model.sav', 'rb'))
 liver_model = pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/liver_model.sav', 'rb'))
-
+heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
 
 
 # sidebar for navigation
@@ -320,14 +320,53 @@ if (selected == "Liver Disease Prediction"):
     Liverdiagnosis = ''
     
     # creating a button for Prediction    
-    if st.button("Liver Test Result"):
-        Liverprediction = liver_model .predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB]])                          
+    # if st.button("Liver Test Result"):
+    #     Liverprediction = liver_model .predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB]])                          
         
-        if (Liverprediction[0] == 1):
-          Liverdiagnosis = "The person has Liver disease"
-        else:
-          Liverdiagnosis = "The person does not have Liver disease"
+    #     if (Liverprediction[0] == 1):
+    #       Liverdiagnosis = "The person has Liver disease"
+    #     else:
+    #       Liverdiagnosis = "The person does not have Liver disease"
         
-    st.success(Liverdiagnosis)    
+    # st.success(Liverdiagnosis)  
+    #   
+    if st.button('Liver Disease Test Result'):
+    
+
+    # Once the progress bar animation is complete, display the result
+        Liverprediction = liver_model .predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB]])
+        # Define the endpoints for the bar graph
+        happy_end = u"\U0001F603"  # Smiling face emoji
+        sad_end = u"\U0001F614"  # Pensive face emoji
+
+# Define the colors for the bar graph
+        green_color = '#00cc96'
+        red_color = '#ef5350'
+
+# Define the animation function
+        def animate_bar_graph(heart_prediction):
+            with st.spinner('Processing...'):
+                time.sleep(2)
+                # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                if Liverprediction[0] == 0:
+                    bar_color = green_color
+                    bar_width = 0.2
+                    end_point = happy_end
+                    Liverdiagnosis   = "The person has no Liver disease"
+                    st.success(f'{Liverdiagnosis } {end_point}')
+                else:
+                    bar_color = red_color
+                    bar_width = 500
+                    end_point = sad_end
+                    Liverdiagnosis  = "The person has Liver disease"
+                    st.error(f'{Liverdiagnosis  } {end_point}')
+            
+           
+            
+            #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+
+# Call the function with the heart_prediction variable
+        animate_bar_graph(Liverprediction )
+    
 
 
