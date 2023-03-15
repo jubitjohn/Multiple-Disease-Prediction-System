@@ -17,6 +17,7 @@ from streamlit_option_menu import option_menu
 # heart_disease_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/heart_disease_model.sav','rb'))
 
 # parkinsons_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/parkinsons_model.sav', 'rb'))
+liver_model = pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/liver_model.sav', 'rb'))
 
 
 
@@ -243,6 +244,8 @@ if (selected == "Parkinsons Prediction"):
         
     st.success(parkinsons_diagnosis)
 
+# Liver disease Prediction Page
+
 if (selected == "Liver Disease Prediction"):
     
     # page title
@@ -251,79 +254,43 @@ if (selected == "Liver Disease Prediction"):
     col1, col2, col3, col4, col5 = st.columns(5)  
     
     with col1:
-        fo = st.text_input('MDVP:Fo(Hz)')
+        fo = st.text_input('Age')
         
     with col2:
-        fhi = st.text_input('MDVP:Fhi(Hz)')
+        fhi = st.text_input('Gender')
         
     with col3:
-        flo = st.text_input('MDVP:Flo(Hz)')
+        flo = st.text_input('Total_Bilirubin')
         
     with col4:
-        Jitter_percent = st.text_input('MDVP:Jitter(%)')
+        Jitter_percent = st.text_input('Direct_Bilirubin	')
         
     with col5:
-        Jitter_Abs = st.text_input('MDVP:Jitter(Abs)')
+        Jitter_Abs = st.text_input('AlkalinePhosphotase')
         
     with col1:
-        RAP = st.text_input('MDVP:RAP')
+        RAP = st.text_input('Alamine_Atf')
         
     with col2:
-        PPQ = st.text_input('MDVP:PPQ')
+        PPQ = st.text_input('Aspartate_Atf')
         
     with col3:
-        DDP = st.text_input('Jitter:DDP')
+        DDP = st.text_input('Total_Protiens')
         
     with col4:
-        Shimmer = st.text_input('MDVP:Shimmer')
+        Shimmer = st.text_input('Albumin')
         
     with col5:
-        Shimmer_dB = st.text_input('MDVP:Shimmer(dB)')
+        Shimmer_dB = st.text_input('AandG_Ratio')
         
-    with col1:
-        APQ3 = st.text_input('Shimmer:APQ3')
-        
-    with col2:
-        APQ5 = st.text_input('Shimmer:APQ5')
-        
-    with col3:
-        APQ = st.text_input('MDVP:APQ')
-        
-    with col4:
-        DDA = st.text_input('Shimmer:DDA')
-        
-    with col5:
-        NHR = st.text_input('NHR')
-        
-    with col1:
-        HNR = st.text_input('HNR')
-        
-    with col2:
-        RPDE = st.text_input('RPDE')
-        
-    with col3:
-        DFA = st.text_input('DFA')
-        
-    with col4:
-        spread1 = st.text_input('spread1')
-        
-    with col5:
-        spread2 = st.text_input('spread2')
-        
-    with col1:
-        D2 = st.text_input('D2')
-        
-    with col2:
-        PPE = st.text_input('PPE')
-        
-    
+  
     
     # code for Prediction
     Liverdiagnosis = ''
     
     # creating a button for Prediction    
     if st.button("Liver Test Result"):
-        Liverprediction = Livermodel.predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB,APQ3,APQ5,APQ,DDA,NHR,HNR,RPDE,DFA,spread1,spread2,D2,PPE]])                          
+        Liverprediction = liver_model .predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB]])                          
         
         if (Liverprediction[0] == 1):
           Liverdiagnosis = "The person has Liver disease"
