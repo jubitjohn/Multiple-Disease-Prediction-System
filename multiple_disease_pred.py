@@ -312,35 +312,36 @@ if (selected == "Liver Disease Prediction"):
     col1, col2, col3, col4, col5 = st.columns(5)  
     
     with col1:
-        fo = st.text_input('Age')
+        age_l = st.text_input('Age')
         
     with col2:
-        fhi = st.text_input('Gender')
+        gender_l = st.text_input('Gender')
         
     with col3:
-        flo = st.text_input('Total_Bilirubin')
+        Bilirubin_l = st.text_input('Total_Bilirubin')
         
     with col4:
-        Jitter_percent = st.text_input('Direct_Bilirubin	')
+        Direct_l = st.text_input('Direct_Bilirubin	')
         
     with col5:
-        Jitter_Abs = st.text_input('AlkalinePhosphotase')
+        Alkaline_l = st.text_input('AlkalinePhosphotase')
         
     with col1:
-        RAP = st.text_input('Alamine_Atf')
+        Alamine_l = st.text_input('Alamine_Atf')
         
     with col2:
-        PPQ = st.text_input('Aspartate_Atf')
+        Aspartate_l = st.text_input('Aspartate_Atf')
         
     with col3:
-        DDP = st.text_input('Total_Protiens')
+        Protiens_l = st.text_input('Total_Protiens')
         
     with col4:
-        Shimmer = st.text_input('Albumin')
+        Albumin_l = st.text_input('Albumin')
         
     with col5:
-        Shimmer_dB = st.text_input('AandG_Ratio')
+        AnandG_l = st.text_input('AandG_Ratio')
         
+  
   
     
     # code for Prediction
@@ -361,7 +362,7 @@ if (selected == "Liver Disease Prediction"):
     
 
     # Once the progress bar animation is complete, display the result
-        Liverprediction = liver_model .predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB]])
+        Liverprediction = liver_model .predict([[age_l, gender_l, Bilirubin_l, Direct_l,Alkaline_l, Alamine_l, Aspartate_l,Protiens_l,Albumin_l,AnandG_l]])
         # Define the endpoints for the bar graph
         happy_end = u"\U0001F603"  # Smiling face emoji
         sad_end = u"\U0001F614"  # Pensive face emoji
@@ -371,11 +372,11 @@ if (selected == "Liver Disease Prediction"):
         red_color = '#ef5350'
 
 # Define the animation function
-        def animate_bar_graph(heart_prediction):
+        def animate_bar_graph(Liverprediction):
             with st.spinner('Processing...'):
                 time.sleep(2)
                 # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if Liverprediction[0] == 0:
+                if Liverprediction[0] == 2:
                     bar_color = green_color
                     bar_width = 0.2
                     end_point = happy_end
