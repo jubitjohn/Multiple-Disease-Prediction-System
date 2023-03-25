@@ -13,13 +13,13 @@ import time
 
 # loading the saved models
 
-diabetes_model = pickle.load(open(r'C:\Users\Admin\OneDrive\Desktop\Multiple-Disease-Prediction-System\saved models\diabetes_model1.sav', 'rb'))
+#diabetes_model = pickle.load(open(r'C:\Users\Admin\OneDrive\Desktop\Multiple-Disease-Prediction-System\saved models\diabetes_model1.sav', 'rb'))
 
 # heart_disease_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/heart_disease_model.sav','rb'))
 
 # parkinsons_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/parkinsons_model.sav', 'rb'))
-# liver_model = pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/liver_model.sav', 'rb'))
-# heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
+liver_model = pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/liver_model.sav', 'rb'))
+heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
 
 
 # sidebar for navigation
