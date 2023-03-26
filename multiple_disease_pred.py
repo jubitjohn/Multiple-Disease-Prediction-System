@@ -359,42 +359,62 @@ if (selected == "Liver Disease Prediction"):
     # st.success(Liverdiagnosis)  
     #   
     if st.button('Liver Disease Test Result'):
-    
 
-    # Once the progress bar animation is complete, display the result
-        Liverprediction = liver_model .predict([[age_l, gender_l, Bilirubin_l, Direct_l,Alkaline_l, Alamine_l, Aspartate_l,Protiens_l,Albumin_l,AnandG_l]])
-        # Define the endpoints for the bar graph
-        happy_end = u"\U0001F603"  # Smiling face emoji
-        sad_end = u"\U0001F614"  # Pensive face emoji
+        if age_l=='' or not age_l.isdigit():
+            st.error("Age is invalid. Enter a valid age");
+        elif gender_l!='1' and gender_l!='0':
+            st.error("Gender is invalid, Enter 1 for Male or 2 for Female");
+        elif Bilirubin_l=='' or not Bilirubin_l.isdigit():
+            st.error("Total_Bilirubin level is invalid");
+        elif Direct_l=='' or not Direct_l.isdigit():
+            st.error("Direct_Bilirubin Value is invalid");
+        elif Alkaline_l=='' or not Alkaline_l.isdigit():
+            st.error("AlkalinePhosphotase level is invalid");
+        elif Alamine_l=='' or not Alamine_l.isdigit():
+            st.error("Alamine_Atf level is invalid");
+        elif Aspartate_l=='' or not Aspartate_l.isdigit():
+            st.error("Aspartate_Atf level is invalid");
+        elif Protiens_l=='' or not Protiens_l.isdigit():
+            st.error("Total_Protiens level is invalid");
+        elif Albumin_l=='' or not Albumin_l.isdigit():
+            st.error("Albumin level is invalid");
+        elif AnandG_l=='' or not AnandG_l.isdigit():
+            st.error("AandG_Ratio is invalid");
+        else:                     
+        # Once the progress bar animation is complete, display the result
+            Liverprediction = liver_model .predict([[age_l, gender_l, Bilirubin_l, Direct_l,Alkaline_l, Alamine_l, Aspartate_l,Protiens_l,Albumin_l,AnandG_l]])
+            # Define the endpoints for the bar graph
+            happy_end = u"\U0001F603"  # Smiling face emoji
+            sad_end = u"\U0001F614"  # Pensive face emoji
 
-# Define the colors for the bar graph
-        green_color = '#00cc96'
-        red_color = '#ef5350'
+    # Define the colors for the bar graph
+            green_color = '#00cc96'
+            red_color = '#ef5350'
 
-# Define the animation function
-        def animate_bar_graph(Liverprediction):
-            with st.spinner('Processing...'):
-                time.sleep(2)
-                # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if Liverprediction[0] == 2:
-                    bar_color = green_color
-                    bar_width = 0.2
-                    end_point = happy_end
-                    Liverdiagnosis   = "The person has no Liver disease"
-                    st.success(f'{Liverdiagnosis } {end_point}')
-                else:
-                    bar_color = red_color
-                    bar_width = 500
-                    end_point = sad_end
-                    Liverdiagnosis  = "The person has Liver disease"
-                    st.error(f'{Liverdiagnosis  } {end_point}')
+    # Define the animation function
+            def animate_bar_graph(Liverprediction):
+                with st.spinner('Processing...'):
+                    time.sleep(2)
+                    # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                    if Liverprediction[0] == 2:
+                        bar_color = green_color
+                        bar_width = 0.2
+                        end_point = happy_end
+                        Liverdiagnosis   = "The person has no Liver disease"
+                        st.success(f'{Liverdiagnosis } {end_point}')
+                    else:
+                        bar_color = red_color
+                        bar_width = 500
+                        end_point = sad_end
+                        Liverdiagnosis  = "The person has Liver disease"
+                        st.error(f'{Liverdiagnosis  } {end_point}')
+                
             
-           
-            
-            #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+                
+                #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
 
-# Call the function with the heart_prediction variable
-        animate_bar_graph(Liverprediction )
-    
+    # Call the function with the heart_prediction variable
+            animate_bar_graph(Liverprediction )
+        
 
 
