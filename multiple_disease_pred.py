@@ -388,9 +388,9 @@ if (selected == "Liver Disease Prediction"):
             st.error("Age is invalid. Enter a valid age");
         elif gender_l!='1' and gender_l!='0':
             st.error("Gender is invalid, Enter 1 for Male or 2 for Female");
-        elif Bilirubin_l=='' or not Bilirubin_l.isdigit():
+        elif Bilirubin_l=='' or Bilirubin_l.isalpha():
             st.error("Total_Bilirubin level is invalid");
-        elif Direct_l=='' or not Direct_l.isdigit():
+        elif Direct_l=='' or Direct_l.isalpha():
             st.error("Direct_Bilirubin Value is invalid");
         elif Alkaline_l=='' or not Alkaline_l.isdigit():
             st.error("AlkalinePhosphotase level is invalid");
@@ -398,11 +398,11 @@ if (selected == "Liver Disease Prediction"):
             st.error("Alamine_Atf level is invalid");
         elif Aspartate_l=='' or not Aspartate_l.isdigit():
             st.error("Aspartate_Atf level is invalid");
-        elif Protiens_l=='' or not Protiens_l.isdigit():
+        elif Protiens_l=='' or Protiens_l.isalpha():
             st.error("Total_Protiens level is invalid");
-        elif Albumin_l=='' or not Albumin_l.isdigit():
+        elif Albumin_l=='' or Albumin_l.isalpha():
             st.error("Albumin level is invalid");
-        elif AnandG_l=='' or not AnandG_l.isdigit():
+        elif AnandG_l=='' or AnandG_l.isalpha():
             st.error("AandG_Ratio is invalid");
         else:                     
         # Once the progress bar animation is complete, display the result
