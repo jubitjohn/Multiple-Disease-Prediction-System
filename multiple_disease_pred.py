@@ -14,8 +14,8 @@ import time
 # heart_disease_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/heart_disease_model.sav','rb'))
 
 # parkinsons_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/parkinsons_model.sav', 'rb'))
-liver_model = pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/liver_model.sav', 'rb'))
-heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
+liver_model = pickle.load(open(r'C:\Users\Admin\OneDrive\Desktop\Multiple-Disease-Prediction-System\saved models\liver_model_new2.sav', 'rb'))
+#heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
 
 
 # sidebar for navigation
@@ -378,7 +378,7 @@ if (selected == "Liver Disease Prediction"):
             st.error("AandG_Ratio is invalid");
         else:                     
         # Once the progress bar animation is complete, display the result
-            Liverprediction = liver_model .predict([[age_l, gender_l, Bilirubin_l, Direct_l,Alkaline_l, Alamine_l, Aspartate_l,Protiens_l,Albumin_l,AnandG_l]])
+            Liverprediction = liver_model .predict([[int(age_l), int(gender_l), float(Bilirubin_l), float(Direct_l),int(Alkaline_l), int(Alamine_l), int(Aspartate_l),float(Protiens_l),float(Albumin_l),float(AnandG_l)]])
             # Define the endpoints for the bar graph
             happy_end = u"\U0001F603"  # Smiling face emoji
             sad_end = u"\U0001F614"  # Pensive face emoji
