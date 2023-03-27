@@ -194,7 +194,7 @@ if (selected == 'Heart Disease Prediction'):
             st.error("Diastolic Blood Pressure level is invalid");
         elif BMI=='' or not BMI.isdigit():
             st.error("Body Mass Index value is invalid");
-        elif heartRate=='' or not heartRate.isdigit():
+        elif heartRate=='' or not heartRate.isdigit() or int(heartRate)>250 or int(heartRate)<25:
             st.error("Heart Rate value is invalid");
         elif glucose=='' or not glucose.isdigit():
             st.error("Glucose level is invalid");
