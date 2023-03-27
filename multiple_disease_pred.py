@@ -11,10 +11,10 @@ import time
 
 #diabetes_model = pickle.load(open(r'C:\Users\Admin\OneDrive\Desktop\Multiple-Disease-Prediction-System\saved models\diabetes_model1.sav', 'rb'))
 
-# heart_disease_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('/Users/anju/Desktop/git1Multiple-Disease-Prediction-System/saved models/heart_pred_3k_logreg.sav','rb'))
 
 # parkinsons_model = pickle.load(open('C:/Users/siddhardhan/Desktop/Multiple Disease Prediction System/saved models/parkinsons_model.sav', 'rb'))
-liver_model = pickle.load(open(r'C:\Users\Admin\OneDrive\Desktop\Multiple-Disease-Prediction-System\saved models\liver_model_new2.sav', 'rb'))
+liver_model = pickle.load(open('/Users/anju/Desktop/git1Multiple-Disease-Prediction-System/saved models/liver_model_new2.sav', 'rb'))
 #heart_disease_model= pickle.load(open('/Users/jubitjohn/Downloads/Multiple Disease Prediction System/saved models/heart_pred_3k_logreg.sav', 'rb'))
 
 
@@ -170,42 +170,70 @@ if (selected == 'Heart Disease Prediction'):
     # creating a button for Prediction
     
     if st.button('Heart Disease Test Result'):
-    
+        if age=='' or not age.isdigit():
+            st.error("Age is invalid. Enter a valid age");
+        elif sex!='1' and sex!='0':
+            st.error("Gender is invalid, Enter 1 for Male or 0 for Female");
+        elif currentSmoker!='1' and currentSmoker!='0':
+            st.error("Current Smoker is invalid, Enter 1 for Yes or 0 for No");
+        elif cigsperDay=='' or not cigsperDay.isdigit():
+            st.error("Cigarette Per Day value is invalid");
+        elif BPMeds!='1' and BPMeds!='0':
+            st.error("Blood Pressure Medication Value is invalid, Enter 1 for Yes or 0 for No");
+        elif prevalentStroke!='1' and prevalentStroke!='0':
+            st.error("Prevalent Stroke value is invalid, if patient had a previous stroke Enter 1, else 0");
+        elif prevalentHyp!='1' and prevalentHyp!='0':
+            st.error("Hypertensive value is invalid, if patient was hypertensive Enter 1, else 0");
+        elif diabetes!='1' and diabetes!='0':
+            st.error("Diabetes value is invalid, if patient has diabetes Enter 1, else 0");
+        elif totChol=='' or not totChol.isdigit():
+            st.error("Total Cholesterol level  is invalid");
+        elif sysBP=='' or not sysBP.isdigit():
+            st.error("Systolic Blood Pressure level is invalid");
+        elif diaBP=='' or not diaBP.isdigit():
+            st.error("Diastolic Blood Pressure level is invalid");
+        elif BMI=='' or not BMI.isdigit():
+            st.error("Body Mass Index value is invalid");
+        elif heartRate=='' or not heartRate.isdigit():
+            st.error("Heart Rate value is invalid");
+        elif glucose=='' or not glucose.isdigit():
+            st.error("Glucose level is invalid");
+        else:  
 
-    # Once the progress bar animation is complete, display the result
-        heart_prediction=heart_disease_model.predict([[int(sex),int(age),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),int(diaBP),float(BMI),int(heartRate),int(glucose)]])     
-        # Define the endpoints for the bar graph
-        happy_end = u"\U0001F603"  # Smiling face emoji
-        sad_end = u"\U0001F614"  # Pensive face emoji
-
-# Define the colors for the bar graph
-        green_color = '#00cc96'
-        red_color = '#ef5350'
-
-# Define the animation function
-        def animate_bar_graph(heart_prediction):
-            with st.spinner('Processing...'):
-                time.sleep(2)
-                # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if heart_prediction[0] == 0:
-                    bar_color = green_color
-                    bar_width = 0.2
-                    end_point = happy_end
-                    heart_diagnosis = "The person has no heart disease"
-                    st.success(f'{heart_diagnosis} {end_point}')
-                else:
-                    bar_color = red_color
-                    bar_width = 500
-                    end_point = sad_end
-                    heart_diagnosis = "The person has heart disease"
-                    st.error(f'{heart_diagnosis} {end_point}')
-            
-           
-            
-            #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
-
-# Call the function with the heart_prediction variable
-        animate_bar_graph(heart_prediction)
+        # Once the progress bar animation is complete, display the result
+            heart_prediction=heart_disease_model.predict([[int(sex),int(age),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),int(diaBP),float(BMI),int(heartRate),int(glucose)]])     
+            # Define the endpoints for the bar graph
+            happy_end = u"\U0001F603"  # Smiling face emoji
+            sad_end = u"\U0001F614"  # Pensive face emoji
+        
+        #define the colors for the bar graph
+            green_color = '#00cc96'
+            red_color = '#ef5350'
+        
+        #define the animation function
+            def animate_bar_graph(heart_prediction):
+                with st.spinner('Processing...'):
+                    time.sleep(2)
+                    # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                    if heart_prediction[0] == 0:
+                        bar_color = green_color
+                        bar_width = 0.2
+                        end_point = happy_end
+                        heart_diagnosis = "The person has no heart disease"
+                        st.success(f'{heart_diagnosis} {end_point}')
+                    else:
+                        bar_color = red_color
+                        bar_width = 500
+                        end_point = sad_end
+                        heart_diagnosis = "The person has heart disease"
+                        st.error(f'{heart_diagnosis} {end_point}')
+                
+               
+                
+                #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+        
+        #call the function with the heart_prediction variable
+            animate_bar_graph(heart_prediction)
         
 
 # Parkinson's Prediction Page
