@@ -9,7 +9,7 @@ import time
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('saved models/diabetes_model1.sav', 'rb'))
+diabetes_model = pickle.load(open('saved models/diabetes_model_final.sav', 'rb'))
 
 heart_disease_model = pickle.load(open('saved models/heart_pred_3k_logreg.sav','rb'))
 
