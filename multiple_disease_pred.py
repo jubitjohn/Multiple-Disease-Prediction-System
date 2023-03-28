@@ -86,41 +86,58 @@ if (selected == 'Diabetes Prediction'):
 
 
 #         diab_prediction = diabetes_model.predict(std_data)
+        if Pregnancies=='' or not Pregnancies.isdigit():
+            st.error("No of Pregnancies is invalid. Enter a valid number");
+        elif Glucose=='' or not Glucose.isdigit():
+            st.error("Glucose value is invalid, Enter a valid number");
+        elif BloodPressure=='' or not BloodPressure.isdigit():
+            st.error("Blood pressure value is invalid, Enter a valid number");
+        elif SkinThickness=='' or not SkinThickness.isdigit():
+            st.error("SkinThickness value is invalid");
+        elif Insulin=='' or not Insulin.isdigit():
+            st.error("Insulin value is invalid");
+        elif BMI=='' or BMI.isalpha():
+            st.error("BMI value is invalid, Enter a valid value ");
+        elif DiabetesPedigreeFunction=='' or DiabetesPedigreeFunction.isalpha():
+            st.error("Diabetes pedigree function value is invalid, Enter a valid value");
+        elif Age=='' or not Age.isdigit():
+            st.error("Age is invalid,Enter a valid value");
+        else:  
 
-        diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
+            diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
         
-        # Define the endpoints for the bar graph
-        happy_end = u"\U0001F603"  # Smiling face emoji
-        sad_end = u"\U0001F614"  # Pensive face emoji
+            # Define the endpoints for the bar graph
+            happy_end = u"\U0001F603"  # Smiling face emoji
+            sad_end = u"\U0001F614"  # Pensive face emoji
         
-        #define the colors for the bar graph
-        green_color = '#00cc96'
-        red_color = '#ef5350'
+            #define the colors for the bar graph
+            green_color = '#00cc96'
+            red_color = '#ef5350'
         
-        #define the animation function
-        def animate_bar_graph(diab_prediction):
-            with st.spinner('Processing...'):
-                time.sleep(2)
-                    # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if diab_prediction[0] == 0:
-                    bar_color = green_color
-                    bar_width = 0.2
-                    end_point = happy_end
-                    diab_diagnosis = "The person has no diabetes"
-                    st.success(f'{diab_diagnosis} {end_point}')
-                else:
-                    bar_color = red_color
-                    bar_width = 500
-                    end_point = sad_end
-                    diab_diagnosis = "The person has diabetes"
-                    st.error(f'{diab_diagnosis} {end_point}')
+            #define the animation function
+            def animate_bar_graph(diab_prediction):
+                with st.spinner('Processing...'):
+                    time.sleep(2)
+                        # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                    if diab_prediction[0] == 0:
+                        bar_color = green_color
+                        bar_width = 0.2
+                        end_point = happy_end
+                        diab_diagnosis = "The person has no diabetes"
+                        st.success(f'{diab_diagnosis} {end_point}')
+                    else:
+                        bar_color = red_color
+                        bar_width = 500
+                        end_point = sad_end
+                        diab_diagnosis = "The person has diabetes"
+                        st.error(f'{diab_diagnosis} {end_point}')
                 
                
                 
                 #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
         
         #call the function with the heart_prediction variable
-        animate_bar_graph(diab_prediction)
+            animate_bar_graph(diab_prediction)
         
 
 
