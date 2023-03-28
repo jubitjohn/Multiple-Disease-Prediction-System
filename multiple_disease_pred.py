@@ -5,11 +5,15 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 import time
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
 
 
 # loading the saved models
 
-diabetes_model_new = pickle.load(open('saved models/diabetes_final.sav', 'rb'))
+diabetes_model = pickle.load(open('saved models/finalized_model.sav', 'rb'))
 
 heart_disease_model = pickle.load(open('saved models/newfinal_heart.sav','rb'))
 
@@ -66,46 +70,31 @@ if (selected == 'Diabetes Prediction'):
     
     
     # code for Prediction
-    diab_diagnosis =''
+    diab_diagnosis = ''
     
     # creating a button for Prediction
     
     if st.button('Diabetes Test Result'):
-        # Once the progress bar animation is complete, display the result
-        diab_prediction=diabetes_model_new.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
+#         input_data=(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age)
+#         input_data_as_numpy_array = np.asarray(input_data)
+
+# #reshape array as we are predicting for one instance
+#         input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+
+# #standardize input data
+#         std_data = scaler.fit_transform(input_data_reshaped)
+
+
+#         diab_prediction = diabetes_model.predict(std_data)
+
+        diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
         
-        # Define the endpoints for the bar graph
-        happy_end = u"\U0001F603"  # Smiling face emoji
-        sad_end = u"\U0001F614"  # Pensive face emoji
-
-# Define the colors for the bar graph
-        green_color = '#00cc96'
-        red_color = '#ef5350'
-
-# Define the animation function
-        def animate_bar_graph(diab_prediction):
-            with st.spinner('Processing...'):
-                time.sleep(2)
-                # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if diab_prediction[0]==0:
-                    bar_color = green_color
-                    bar_width = 0.2
-                    end_point = happy_end
-                    diab_diagnosis = "The person has no diabetes"
-                    st.success(f'{diab_diagnosis} {end_point}')
-                elif diab_prediction[0]==1:
-                    bar_color = red_color
-                    bar_width = 500
-                    end_point = sad_end
-                    diab_diagnosis = "The person has diabetes"
-                    st.error(f'{diab_diagnosis} {end_point}')
-            
-           
-            
-            #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
-
-# Call the function with the heart_prediction variable
-        animate_bar_graph(diab_prediction)
+        if (diab_prediction[0] == 0):
+          diab_diagnosis = 'The person is not diabetic'
+        else:
+          diab_diagnosis = 'The person is diabetic'
+        
+    st.success(diab_diagnosis)
         
 
 
