@@ -93,7 +93,7 @@ if (selected == 'Diabetes Prediction'):
                     end_point = happy_end
                     diab_diagnosis = "The person has no diabetes"
                     st.success(f'{diab_diagnosis} {end_point}')
-                elif diab_prediction[0]==11:
+                elif diab_prediction[0]==1:
                     bar_color = red_color
                     bar_width = 500
                     end_point = sad_end
