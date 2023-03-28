@@ -250,7 +250,7 @@ if (selected == 'Heart Disease Prediction'):
         elif slope!='0' and slope!='1' and slope!='2':
             st.error("slope value is invalid, Enter 0 for unsloping and Enter 1 for flat and Enter 2 for downsloping");
         elif ca!='0' and ca!='1' and ca!='2' and ca!='3' and ca!='4':
-            st.error("ca value is invalid");
+            st.error("No of major vessels(0-4) colored by fluoroscpy value is invalid");
         elif thal!='0' and thal!='1' and thal!='2' and thal!='3':
             st.error("thal value is invalid");
         else:  
