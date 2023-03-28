@@ -11,7 +11,7 @@ import time
 
 diabetes_model_new = pickle.load(open('saved models/diabetes_final.sav', 'rb'))
 
-heart_disease_model = pickle.load(open('saved models/heart_pred_3k_logreg.sav','rb'))
+heart_disease_model = pickle.load(open('saved models/newfinal_heart.sav','rb'))
 
 parkinsons_model = pickle.load(open('saved models/parkinsons_model.sav', 'rb'))
 
@@ -118,6 +118,50 @@ if (selected == 'Heart Disease Prediction'):
     
     col1, col2, col3 = st.columns(3)
     
+    # with col1:
+    #     age = st.text_input('Age')
+        
+    # with col2:
+    #     sex = st.text_input('Sex')
+        
+    # with col3:
+    #     currentSmoker = st.text_input('Current Smoker or not')
+        
+    # with col1:
+    #     cigsperDay = st.text_input('Cigarette amounts per day')
+        
+    # with col2:
+    #     BPMeds = st.text_input('If the patient was on a BP medication')
+        
+    # with col3:
+    #     prevalentStroke = st.text_input('Any previous strokes')
+        
+    # with col1:
+    #     prevalentHyp = st.text_input('Hypertensive or not')
+        
+    # with col2:
+    #     diabetes= st.text_input('Diabetic or not')
+        
+    # with col3:
+    #     totChol = st.text_input('Total cholesterol level')
+        
+    # with col1:
+    #     sysBP = st.text_input('Cystolic blood pressure')
+        
+    # with col2:
+    #     diaBP = st.text_input('Diastolic blood pressure')
+        
+    # with col3:
+    #     BMIn = st.text_input('Body Mass Index')
+        
+    # with col1:
+    #     heartRate = st.text_input('Heart rate')
+    
+    # with col2:
+    #     glucose = st.text_input('Glucose level')
+
+    #new code -----------------------------------------------
+      
     with col1:
         age = st.text_input('Age')
         
@@ -125,42 +169,38 @@ if (selected == 'Heart Disease Prediction'):
         sex = st.text_input('Sex')
         
     with col3:
-        currentSmoker = st.text_input('Current Smoker or not')
+        cp = st.text_input('Chest Pain')
         
     with col1:
-        cigsperDay = st.text_input('Cigarette amounts per day')
+        trestbps = st.text_input('Resting Blood Pressure(mm Hg)')
         
     with col2:
-        BPMeds = st.text_input('If the patient was on a BP medication')
+        chol = st.text_input('Serum Cholestrol(mg/dl)')
         
     with col3:
-        prevalentStroke = st.text_input('Any previous strokes')
+        fbs = st.text_input('Fasting Blood Sugar>120mg/dl')
         
     with col1:
-        prevalentHyp = st.text_input('Hypertensive or not')
+        restecg= st.text_input('Resting electrocardiographic result')
         
     with col2:
-        diabetes= st.text_input('Diabetic or not')
+        thalach = st.text_input('Maximum heart rate achieved')
         
     with col3:
-        totChol = st.text_input('Total cholesterol level')
+        exang = st.text_input('Exercise induced angina')
         
     with col1:
-        sysBP = st.text_input('Cystolic blood pressure')
+        oldpeak = st.text_input('ST depression induced by exercise relative to rest')
         
     with col2:
-        diaBP = st.text_input('Diastolic blood pressure')
+        slope = st.text_input('Slope of the peak exercise ST segment                        .')
         
     with col3:
-        BMIn = st.text_input('Body Mass Index')
-        
-    with col1:
-        heartRate = st.text_input('Heart rate')
+        ca = st.text_input('No of major vessels(0-4) colored by fluoroscpy')
     
-    with col2:
-        glucose = st.text_input('Glucose level')
-
-        
+    with col1:
+        thal = st.text_input('thal')
+     
         
      
      
@@ -170,38 +210,64 @@ if (selected == 'Heart Disease Prediction'):
     # creating a button for Prediction
     
     if st.button('Heart Disease Test Result'):
+        # if age=='' or not age.isdigit():
+        #     st.error("Age is invalid. Enter a valid age");
+        # elif sex!='1' and sex!='0':
+        #     st.error("Gender is invalid, Enter 1 for Male or 0 for Female");
+        # elif currentSmoker!='1' and currentSmoker!='0':
+        #     st.error("Current Smoker is invalid, Enter 1 for Yes or 0 for No");
+        # elif cigsperDay=='' or not cigsperDay.isdigit():
+        #     st.error("Cigarette Per Day value is invalid");
+        # elif BPMeds!='1' and BPMeds!='0':
+        #     st.error("Blood Pressure Medication Value is invalid, Enter 1 for Yes or 0 for No");
+        # elif prevalentStroke!='1' and prevalentStroke!='0':
+        #     st.error("Prevalent Stroke value is invalid, if patient had a previous stroke Enter 1, else 0");
+        # elif prevalentHyp!='1' and prevalentHyp!='0':
+        #     st.error("Hypertensive value is invalid, if patient was hypertensive Enter 1, else 0");
+        # elif diabetes!='1' and diabetes!='0':
+        #     st.error("Diabetes value is invalid, if patient has diabetes Enter 1, else 0");
+        # elif totChol=='' or not totChol.isdigit():
+        #     st.error("Total Cholesterol level  is invalid");
+        # elif sysBP=='' or not sysBP.isdigit():
+        #     st.error("Systolic Blood Pressure level is invalid");
+        # elif diaBP=='' or diaBP.isalpha():
+        #     st.error("Diastolic Blood Pressure level is invalid");
+        # elif BMIn=='' or BMIn.isalpha():
+        #     st.error("Body Mass Index value is invalid");
+        # elif heartRate=='' or not heartRate.isdigit() or int(heartRate)>250 or int(heartRate)<25:
+        #     st.error("Heart Rate value is invalid");
+        # elif glucose=='' or not glucose.isdigit():
+        #     st.error("Glucose level is invalid");
         if age=='' or not age.isdigit():
             st.error("Age is invalid. Enter a valid age");
         elif sex!='1' and sex!='0':
             st.error("Gender is invalid, Enter 1 for Male or 0 for Female");
-        elif currentSmoker!='1' and currentSmoker!='0':
-            st.error("Current Smoker is invalid, Enter 1 for Yes or 0 for No");
-        elif cigsperDay=='' or not cigsperDay.isdigit():
-            st.error("Cigarette Per Day value is invalid");
-        elif BPMeds!='1' and BPMeds!='0':
-            st.error("Blood Pressure Medication Value is invalid, Enter 1 for Yes or 0 for No");
-        elif prevalentStroke!='1' and prevalentStroke!='0':
-            st.error("Prevalent Stroke value is invalid, if patient had a previous stroke Enter 1, else 0");
-        elif prevalentHyp!='1' and prevalentHyp!='0':
-            st.error("Hypertensive value is invalid, if patient was hypertensive Enter 1, else 0");
-        elif diabetes!='1' and diabetes!='0':
-            st.error("Diabetes value is invalid, if patient has diabetes Enter 1, else 0");
-        elif totChol=='' or not totChol.isdigit():
-            st.error("Total Cholesterol level  is invalid");
-        elif sysBP=='' or not sysBP.isdigit():
-            st.error("Systolic Blood Pressure level is invalid");
-        elif diaBP=='' or diaBP.isalpha():
-            st.error("Diastolic Blood Pressure level is invalid");
-        elif BMIn=='' or BMIn.isalpha():
-            st.error("Body Mass Index value is invalid");
-        elif heartRate=='' or not heartRate.isdigit() or int(heartRate)>250 or int(heartRate)<25:
-            st.error("Heart Rate value is invalid");
-        elif glucose=='' or not glucose.isdigit():
-            st.error("Glucose level is invalid");
+        elif cp!='1' and cp!='2' and cp!='3' and cp!='0' :
+            st.error("Cp value is invalid, Enter 0 for 'Typical angina', Enter 1 for 'Atypical Angina', Enter 2 for 'Non-anginal Pain', Enter 3 for 'Asymptomatic'");
+        elif trestbps=='' or trestbps.isalpha():
+            st.error("trestbps value is invalid");
+        elif chol=='' or chol.isalpha():
+            st.error("Cholestrol value is invalid");
+        elif fbs!='1' and fbs!='0':
+            st.error("fbs value is invalid, Enter 1 for True or Enter 0 for false ");
+        elif restecg=='' or restecg.isalpha():
+            st.error("Resting electrocardiographic result value is invalid, Enter 0 if normal and Enter 1 for Having ST-T");
+        elif thalach=='' or restecg.isalpha():
+            st.error("thalach value is invalid");
+        elif exang!='0' or exang!='1':
+            st.error("Exercise induced angina value is invalid, Enter 1 for Yes and Enter 0 for No");
+        elif oldpeak=='' or oldpeak.isalpha():
+            st.error("oldpeak level is invalid");
+        elif slope!='0' and slope!='1' and slope!='2':
+            st.error("slope value is invalid, Enter 0 for unsloping and Enter 1 for flat and Enter 2 for downsloping");
+        elif ca!='0' and ca!='1' and ca!='2' and ca!='3' and ca!='4':
+            st.error("ca value is invalid");
+        elif thal!='0' and thal!='1' and thal!='2' and thal!='3':
+            st.error("thal value is invalid");
         else:  
 
         # Once the progress bar animation is complete, display the result
-            heart_prediction=heart_disease_model.predict([[int(age),int(sex),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),float(diaBP),float(BMIn),int(heartRate),int(glucose)]])     
+            heart_prediction=heart_disease_model.predict([[int(age),int(sex),int(cp),int(trestbps),int(chol),int(fbs),int(restecg),int(thalach),int(exang),float(oldpeak),float(slope),int(ca),int(thal)]])     
             # Define the endpoints for the bar graph
             happy_end = u"\U0001F603"  # Smiling face emoji
             sad_end = u"\U0001F614"  # Pensive face emoji
