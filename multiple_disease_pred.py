@@ -9,7 +9,7 @@ import time
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('saved models/diabetes_model_final.sav', 'rb'))
+diabetes_model = pickle.load(open('saved models\diabetes_model_final.sav', 'rb'))
 
 heart_disease_model = pickle.load(open('saved models/heart_pred_3k_logreg.sav','rb'))
 
@@ -72,7 +72,7 @@ if (selected == 'Diabetes Prediction'):
     
     if st.button('Diabetes Test Result'):
         # Once the progress bar animation is complete, display the result
-        diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+        diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
         
         # Define the endpoints for the bar graph
         happy_end = u"\U0001F603"  # Smiling face emoji
