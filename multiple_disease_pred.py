@@ -440,7 +440,7 @@ if (selected == "Parkinsons Prediction"):
                         bar_color = red_color
                         bar_width = 500
                         end_point = sad_end
-                        heart_diagnosis = "The person has parkinsons disease"
+                        parkinsons_diagnosis = "The person has parkinsons disease"
                         st.error(f'{parkinsons_diagnosis} {end_point}')
                 
                
