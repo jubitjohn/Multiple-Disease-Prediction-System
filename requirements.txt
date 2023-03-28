@@ -1,5 +1,5 @@
 scikit-learn==1.2.2
-scikit-learn-intelex==2021.20221004.121333
+
 scipy==1.9.1
 streamlit==1.18.1
 streamlit-option-menu==0.3.2
