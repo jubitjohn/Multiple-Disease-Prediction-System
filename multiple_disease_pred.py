@@ -152,7 +152,7 @@ if (selected == 'Heart Disease Prediction'):
         diaBP = st.text_input('Diastolic blood pressure')
         
     with col3:
-        BMI = st.text_input('Body Mass Index')
+        BMIn = st.text_input('Body Mass Index')
         
     with col1:
         heartRate = st.text_input('Heart rate')
@@ -190,9 +190,9 @@ if (selected == 'Heart Disease Prediction'):
             st.error("Total Cholesterol level  is invalid");
         elif sysBP=='' or not sysBP.isdigit():
             st.error("Systolic Blood Pressure level is invalid");
-        elif diaBP=='' or not diaBP.isdigit():
+        elif diaBP=='' or diaBP.isalpha():
             st.error("Diastolic Blood Pressure level is invalid");
-        elif BMI=='' or not BMI.isdigit():
+        elif BMIn=='' or BMIn.isalpha():
             st.error("Body Mass Index value is invalid");
         elif heartRate=='' or not heartRate.isdigit() or int(heartRate)>250 or int(heartRate)<25:
             st.error("Heart Rate value is invalid");
@@ -201,7 +201,7 @@ if (selected == 'Heart Disease Prediction'):
         else:  
 
         # Once the progress bar animation is complete, display the result
-            heart_prediction=heart_disease_model.predict([[int(sex),int(age),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),int(diaBP),float(BMI),int(heartRate),int(glucose)]])     
+            heart_prediction=heart_disease_model.predict([[int(age),int(sex),int(currentSmoker),int(cigsperDay),int(BPMeds),int(prevalentStroke),int(prevalentHyp),int(diabetes),int(totChol),int(sysBP),float(diaBP),float(BMIn),int(heartRate),int(glucose)]])     
             # Define the endpoints for the bar graph
             happy_end = u"\U0001F603"  # Smiling face emoji
             sad_end = u"\U0001F614"  # Pensive face emoji
@@ -317,14 +317,84 @@ if (selected == "Parkinsons Prediction"):
     
     # creating a button for Prediction    
     if st.button("Parkinson's Test Result"):
-        parkinsons_prediction = parkinsons_model.predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB,APQ3,APQ5,APQ,DDA,NHR,HNR,RPDE,DFA,spread1,spread2,D2,PPE]])                          
-        
-        if (parkinsons_prediction[0] == 1):
-          parkinsons_diagnosis = "The person has Parkinson's disease"
+
+        if fo=='' or not fo.isdigit():
+            st.error("fo Value is invalid");
+        elif fhi=='' or not fhi.isdigit():
+            st.error("fhi Value is invalid");
+        elif flo=='' or not flo.isdigit():
+            st.error("flo Value is invalid");
+        elif Jitter_percent=='' or not Jitter_percent.isdigit():
+            st.error("Jitter_percen Value is invalid");
+        elif Jitter_Abs=='' or not Jitter_Abs.isdigit():
+            st.error("Jitter_Abs Value is invalid");
+        elif RAP=='' or not RAP.isdigit():
+            st.error("RAP level is invalid");
+        elif PPQ =='' or not PPQ .isdigit():
+            st.error("PPQ level is invalid");
+        elif DDP=='' or not DDP.isdigit():
+            st.error("DDP level is invalid");
+        elif Shimmer_dB=='' or not Shimmer_dB.isdigit():
+            st.error("Shimmer_dB level is invalid");
+        elif APQ3=='' or not APQ3.isdigit():
+            st.error("APQ3 is invalid");
+        elif APQ5=='' or not APQ5.isdigit():
+            st.error("APQ5 is invalid");
+        elif APQ=='' or not APQ.isdigit():
+            st.error("APQ is invalid");
+        elif DDA=='' or not DDA.isdigit():
+            st.error("DDA is invalid");
+        elif NHR=='' or not NHR.isdigit():
+            st.error("NHR is invalid");
+        elif HNR=='' or not HNR.isdigit():
+            st.error("HNR is invalid");
+        elif RPDE=='' or not RPDE.isdigit():
+            st.error("RPDE is invalid");
+        elif DFA=='' or not DFA.isdigit():
+            st.error("DFA is invalid");
+        elif spread1=='' or not spread1.isdigit():
+            st.error("spread1 is invalid");
+        elif spread2=='' or not spread2.isdigit():
+            st.error("APQ3 is invalid");
+        elif D2=='' or not D2.isdigit():
+            st.error("D2 is invalid");
+        elif PPE=='' or not PPE.isdigit():
+            st.error("PPE is invalid");
         else:
-          parkinsons_diagnosis = "The person does not have Parkinson's disease"
+            parkinsons_prediction = parkinsons_model.predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ,DDP,Shimmer,Shimmer_dB,APQ3,APQ5,APQ,DDA,NHR,HNR,RPDE,DFA,spread1,spread2,D2,PPE]])                          
+            
+            happy_end = u"\U0001F603"  # Smiling face emoji
+            sad_end = u"\U0001F614"  # Pensive face emoji
+            
+            #define the colors for the bar graph
+            green_color = '#00cc96'
+            red_color = '#ef5350'
         
-    st.success(parkinsons_diagnosis)
+            #define the animation function
+            def animate_bar_graph(parkinsons_prediction):
+                with st.spinner('Processing...'):
+                    time.sleep(2)
+                    # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                    if parkinsons_prediction[0] == 0:
+                        bar_color = green_color
+                        bar_width = 0.2
+                        end_point = happy_end
+                        parkinsons_diagnosis = "The person has no parkinsons disease"
+                        st.success(f'{parkinsons_diagnosis} {end_point}')
+                    else:
+                        bar_color = red_color
+                        bar_width = 500
+                        end_point = sad_end
+                        heart_diagnosis = "The person has parkinsons disease"
+                        st.error(f'{parkinsons_diagnosis} {end_point}')
+                
+               
+                
+                #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+        
+        #call the function with the heart_prediction variable
+            animate_bar_graph(parkinsons_prediction)
+        
 
 # Liver disease Prediction Page
 
