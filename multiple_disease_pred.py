@@ -9,7 +9,7 @@ import time
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('saved models\diabetes_model_final.sav', 'rb'))
+diabetes_model_new = pickle.load(open('saved models/diabetes_final.sav', 'rb'))
 
 heart_disease_model = pickle.load(open('saved models/heart_pred_3k_logreg.sav','rb'))
 
@@ -66,13 +66,13 @@ if (selected == 'Diabetes Prediction'):
     
     
     # code for Prediction
-    diab_diagnosis = ''
+    diab_diagnosis =''
     
     # creating a button for Prediction
     
     if st.button('Diabetes Test Result'):
         # Once the progress bar animation is complete, display the result
-        diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+        diab_prediction=diabetes_model_new.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
         
         # Define the endpoints for the bar graph
         happy_end = u"\U0001F603"  # Smiling face emoji
@@ -87,13 +87,13 @@ if (selected == 'Diabetes Prediction'):
             with st.spinner('Processing...'):
                 time.sleep(2)
                 # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
-                if diab_prediction[0] == 0:
+                if diab_prediction[0]==0:
                     bar_color = green_color
                     bar_width = 0.2
                     end_point = happy_end
                     diab_diagnosis = "The person has no diabetes"
                     st.success(f'{diab_diagnosis} {end_point}')
-                else:
+                elif diab_prediction[0]==11:
                     bar_color = red_color
                     bar_width = 500
                     end_point = sad_end
