@@ -232,18 +232,18 @@ if (selected == 'Heart Disease Prediction'):
         elif sex!='1' and sex!='0':
             st.error("Gender is invalid, Enter 1 for Male or 0 for Female");
         elif cp!='1' and cp!='2' and cp!='3' and cp!='0' :
-            st.error("Cp value is invalid, Enter 0 for 'Typical angina', Enter 1 for 'Atypical Angina', Enter 2 for 'Non-anginal Pain', Enter 3 for 'Asymptomatic'");
+            st.error("Chest Pain value is invalid, Enter 0 for 'Typical angina', Enter 1 for 'Atypical Angina', Enter 2 for 'Non-anginal Pain', Enter 3 for 'Asymptomatic'");
         elif trestbps=='' or trestbps.isalpha():
-            st.error("trestbps value is invalid");
+            st.error("Resting Blood Pressure value is invalid");
         elif chol=='' or chol.isalpha():
-            st.error("Cholestrol value is invalid");
+            st.error("Serum Cholestrol value is invalid");
         elif fbs!='1' and fbs!='0':
-            st.error("fbs value is invalid, Enter 1 for True or Enter 0 for false ");
+            st.error("Fasting Blood Sugar value is invalid, Enter 1 for True or Enter 0 for false ");
         elif restecg=='' or restecg.isalpha():
             st.error("Resting electrocardiographic result value is invalid, Enter 0 if normal and Enter 1 for Having ST-T");
         elif thalach=='' or restecg.isalpha():
-            st.error("thalach value is invalid");
-        elif exang!='0' or exang!='1':
+            st.error("Maximum heart rate achieved value is invalid");
+        elif exang!='0' and exang!='1':
             st.error("Exercise induced angina value is invalid, Enter 1 for Yes and Enter 0 for No");
         elif oldpeak=='' or oldpeak.isalpha():
             st.error("oldpeak level is invalid");
