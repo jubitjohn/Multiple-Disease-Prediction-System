@@ -89,12 +89,38 @@ if (selected == 'Diabetes Prediction'):
 
         diab_prediction = diabetes_model.predict([[int(Pregnancies), int(Glucose), int(BloodPressure), int(SkinThickness), int(Insulin), float(BMI), float(DiabetesPedigreeFunction), int(Age)]])
         
-        if (diab_prediction[0] == 0):
-          diab_diagnosis = 'The person is not diabetic'
-        else:
-          diab_diagnosis = 'The person is diabetic'
+        # Define the endpoints for the bar graph
+        happy_end = u"\U0001F603"  # Smiling face emoji
+        sad_end = u"\U0001F614"  # Pensive face emoji
         
-    st.success(diab_diagnosis)
+        #define the colors for the bar graph
+        green_color = '#00cc96'
+        red_color = '#ef5350'
+        
+        #define the animation function
+        def animate_bar_graph(diab_prediction):
+            with st.spinner('Processing...'):
+                time.sleep(2)
+                    # ADD ANY ANIMATION OR PRINT CODE BELOW THIS
+                if diab_prediction[0] == 0:
+                    bar_color = green_color
+                    bar_width = 0.2
+                    end_point = happy_end
+                    diab_diagnosis = "The person has no diabetes"
+                    st.success(f'{diab_diagnosis} {end_point}')
+                else:
+                    bar_color = red_color
+                    bar_width = 500
+                    end_point = sad_end
+                    diab_diagnosis = "The person has diabetes"
+                    st.error(f'{diab_diagnosis} {end_point}')
+                
+               
+                
+                #st.write(f'<div style="background-color: {bar_color}; height: 50px; width: { bar_width}px;"></div>', unsafe_allow_html=True)
+        
+        #call the function with the heart_prediction variable
+        animate_bar_graph(diab_prediction)
         
 
 
